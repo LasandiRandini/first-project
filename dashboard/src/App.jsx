@@ -1,10 +1,12 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
+import { AuthContextProvider } from "./context/authContext";
 import Sidebar from "./components/sidebar";
 import EmployeeMain from "./pages/employeeMain";
 import DepartmentMain from "./pages/departmentMain";
 import Setting from "./pages/setting";
+import Login from "./pages/login";
+import Register from "./pages/register";
 
 const DashLayout = () => {
   return (
@@ -22,6 +24,8 @@ const DashLayout = () => {
   );
 };
 const router = createBrowserRouter([
+  { path: "/", element: <Login />, },
+  { path: "/register", element: <Register />, },
   {
     path: "/",
     element: <DashLayout />,
@@ -38,12 +42,27 @@ const router = createBrowserRouter([
         path: "/Setting",
         element: <Setting/>,
       },
+      {
+        path: "/Login",
+        element: <Login/>,
+      },
+      {
+        path: "/Register",
+        element: <Register/>,
+      },
        
     ],
   },
 ]);
 
+
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <div>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </div>
+  )
 }
 export default App;

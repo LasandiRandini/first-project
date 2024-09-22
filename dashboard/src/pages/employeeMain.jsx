@@ -7,7 +7,7 @@ const DashboardHome = () => {
   const [departments, setDepartments] = useState([]);
   const [formVisible, setFormVisible] = useState(false); 
 
-  // Employee form states
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ const DashboardHome = () => {
   const [hireDate, setHireDate] = useState("");
   const [departmentId, setDepartmentId] = useState("");
 
-  // Fetch employees and departments on component mount
+ 
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
@@ -42,7 +42,7 @@ const DashboardHome = () => {
     fetchDepartments();
   }, []);
 
-  // Handle form submit
+
   const handleAddEmployee = async () => {
     const newEmployee = {
       first_name: firstName,
@@ -53,13 +53,13 @@ const DashboardHome = () => {
       nic_number: nic,
       contact_no: contact,
       hire_date: hireDate,
-      department_id: departmentId,  // Send department ID, not the name
+      department_id: departmentId,  
     };
 
     try {
       await axios.post("http://localhost:8800/api/employees/addemployees", newEmployee);
-      setFormVisible(false); // Close the form after successful submission
-      // Refetch employees
+      setFormVisible(false); 
+     
       const response = await axios.get("http://localhost:8800/api/employees/getemployees");
       setEmployees(response.data);
     } catch (error) {
@@ -77,7 +77,7 @@ const DashboardHome = () => {
        <StatsCard  />
       </div>
 
-      {/* Add Employee Form Toggle */}
+    
       <button
         className="bg-purple-600 text-white px-4 py-2 rounded mb-4"
         onClick={() => setFormVisible(!formVisible)}
@@ -85,7 +85,7 @@ const DashboardHome = () => {
         {formVisible ? "Close Form" : "Add New Employee"}
       </button>
 
-      {/* Add Employee Form */}
+     
       {formVisible && (
         <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <h2 className="text-xl font-bold mb-4">Add new employee</h2>
@@ -168,7 +168,7 @@ const DashboardHome = () => {
         </div>
       )}
 
-      {/* Employee Table Section */}
+
       <div className="bg-white p-4 rounded-lg shadow-lg">
         <h2 className="text-xl font-bold mb-4">All Employees</h2>
         <div className="overflow-x-auto">
